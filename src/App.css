@@ -85,6 +85,29 @@ body, .app {
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 0 6px rgba(0,0,0,0.23);
 }
 
+.bottom-bar {
+  position: fixed;
+  background-color:#2e7c31;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  display: flex;
+  text-align:center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 0 6px rgba(0,0,0,0.23);
+  cursor:pointer;
+}
+
+.bottom-bar-text {
+  width:100%;
+  padding:20px 0px;
+  font-weight: 400;
+  margin: 0;
+  text-align:Center;
+  color: white;
+  font-size: 1.25em;
+}
+
 .search-books-input-wrapper {
   flex: 1;
   background: #e9e;

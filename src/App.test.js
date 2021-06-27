@@ -1,16 +1,45 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
+import { Route } from 'react-router-dom'
+import * as BooksAPI from './BooksAPI'
+import SearchPage from './SearchPage'
+import ListBooks from './ListBooks'
+import './App.css'
 
-/** 
- This course is not designed to teach Test Driven Development. 
- Feel free to use this file to test your application, but it 
- is not required.
-**/
+class BooksApp extends React.Component {
+	state = {
+		books: []
+	}
 
-it('renders without crashing', () => {
-  const div = document.createElement('div')
-  ReactDOM.render(<App />, div)
-})
+	componentDidMount() {
+		this.getBooks()
+	}
 
+	// Get book data
+	getBooks() {
+        BooksAPI.getAll().then((books) => {
+            this.setState({books});
+        });
+	}
 
+	// Update book data
+	changeBookShelf = (book, shelf) => {
+		BooksAPI.update(book, shelf).then(updateBooks => {
+			this.getBooks();
+		})
+	}
+
+	render() {
+		return (
+			<div className="app">
+				<Route exact path="/" render={() => (
+					<ListBooks books={this.state.books} changeBookShelf={this.changeBookShelf} />
+				)} />
+				<Route path="/search" render ={() => (
+					<SearchPage changeBookShelf={this.changeBookShelf} books={this.state.books} />
+				)} />
+			</div>
+		)
+	}
+}
+
+export default BooksApp
